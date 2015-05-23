@@ -1,0 +1,6 @@
+# you need to change enpXsY to your ethernet interface name, eg. enp0s5
+# you also need to create a symbolic link to /etc/init.d/net.lo in the same directory named /etc/init.d/net.enpXsY
+# finally you need to add net to default rc -> rc-update add net default
+config_enpXsY="192.168.1.41/24"
+routes_enpXsY="default via 192.168.1.1"
+dns_servers_enpXsY="192.168.1.1 8.8.8.8"

@@ -7,4 +7,6 @@ sudo qemu-system-x86_64 -M pc -m 512M -smp 2 \
 -append "root=/dev/vda console=ttyS0,115200n8" \
 -drive file=your-root-disk-file,if=virtio \
 -net nic,model=e1000 -net tap,name=vif0,ifname=tap0,downscript=no \
--nographic
+-nographic\
+# without dns proxy running ssh connections take too long to init in my setup
+#sudo /etc/init.d/dnsmasq start

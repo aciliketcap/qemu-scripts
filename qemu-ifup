@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# copy this file under /etc
+# add following two lines in sudoers file
+# Cmnd_Alias QEMU_NET_SH = /etc/qemu-ifup
+# your_username ALL=(ALL) NOPASSWD: QEMU_NET_SH
+
+ip ad ad 192.168.1.1/24 dev $1
+ip link set $1 up
+# without dns proxy running ssh connections take too long to init in my setup
+/etc/init.d/dnsmasq start

@@ -7,7 +7,7 @@ sudo qemu-system-x86_64 -M pc -m 512M -smp 2 \
 -append "root=/dev/vda" \
 -drive file=your-root-disk-file,if=virtio \
 -net nic,model=e1000 -net tap,name=vif0,ifname=tap0,downscript=no \
--serial stdio \
+-serial mon:stdio \
 -vga std
 #you need to set graphics driver in kernel
 #either Cirrus driver for QEMU

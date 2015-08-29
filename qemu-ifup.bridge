@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# copy this file under /etc as qemu-ifup if you want to use static IP without bridging
+# add following two lines in /etc/sudoers file using visudo
+# Cmnd_Alias QEMU_NET_SH = /etc/qemu-ifup
+# your_username ALL=(ALL) NOPASSWD: QEMU_NET_SH
+
+ip link set $1 up
+brctl addif br0 $1

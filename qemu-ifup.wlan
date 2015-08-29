@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# copy this file under /etc as qemu-ifup if you want to use static IP without bridging
+# add following two lines in /etc/sudoers file using visudo
+# Cmnd_Alias QEMU_NET_SH = /etc/qemu-ifup
+# your_username ALL=(ALL) NOPASSWD: QEMU_NET_SH
+
+ip add address 192.168.1.1/24 dev $1
+ip link set $1 up
+
+# you can comment following two to disable internet access to VM
+# change wlan0 if your wireless interface has a different name
+sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE
+sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
+
+# without dns proxy running ssh connections take too long to init in my setup
+/etc/init.d/dnsmasq start
